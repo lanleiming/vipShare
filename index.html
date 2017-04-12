@@ -44,8 +44,8 @@
                         </select>
                     </div>
                     <div map-search="" hide-search-result="hideSearchResult" current-city="currentCity"  map-mode="mapMode" class="map-search ng-isolate-scope">
-                        <form class="mapsearch-inputbar ng-pristine ng-valid"  ng-submit="search.showSuggests($event, search.keyword)">
-                            <input  placeholder="请输入店铺名称" ng-model="search.keyword"   ng-keyup="search.showSuggests($event, search.keyword)"  ng-keydown="search.chooseSuggest($event)" ng-click="search.showSuggests($event)"
+                        <form class="mapsearch-inputbar ng-pristine ng-valid" action="list.html" >
+                            <input  name="keyword" placeholder="请输入店铺名称" ng-model="search.keyword"   ng-keyup="search.showSuggests($event, search.keyword)"  ng-keydown="search.chooseSuggest($event)" ng-click="search.showSuggests($event)"
                                 ng-focus="search.showSuggests($event, search.keyword)" class="ng-pristine ng-valid">
                             <button class="btn-stress" type="submit">搜 索</button>
                         </form>
