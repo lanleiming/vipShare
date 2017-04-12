@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title ng-bind="SEO.title">VIP共享网站</title>
+    <link href="css/index1.css" rel="stylesheet">
+    <link href="css/index2.css" rel="stylesheet">
+</head>
+<body cute-title=""  ng-class="{hidesidebar: layoutState &amp;&amp; layoutState.hideSidebar, smallbody: layoutState.smallBody, whitebody: layoutState.whiteBody}" class="hidesidebar whitebody">
+<div ng-view="" role="main" class="ng-scope">
+    <div class="map ng-scope" ng-class="{mapmode: mapMode}">
+        <div class="container mapcontainer">
+            <div class="map-header clearfix" map-header="">
+                <h1>
+                </h1>
+                <span class="map-header-right ng-scope"  ng-if="!user.user_id">
+                    <a ng-href="https://account.ele.me/register" target="_blank" ubt-click="1430"  href="register.html">注册</a>
+                <span>|
+                </span>
+                    <a ng-href="https://account.ele.me/login" ubt-click="1431"  href="login.html">登录</a>
+                </span>
+            </div>
+            <div class="map-main ng-isolate-scope" ng-class="{mapmode: mapMode}" map-main="" map-mode="mapMode">
+                <h2  class="map-logo">VIP共享网站</h2>
+                <div class="map-navbar clearfix" ng-class="{hasuserinfo: $root.user.user_id}">
+                    <div map-city="" hide-search-result="hideSearchResult" current-city="currentCity"  class="map-city ng-isolate-scope" map-mode="mapMode">
+                        <select class="mapcity-current ng-binding">
+                            <option>北京</option>
+                            <option>上海</option>
+                            <option>广州</option>
+                            <option>深圳</option>
+                            <option>成都</option>
+                            <option>杭州</option>
+                            <option>武汉</option>
+                            <option>天津</option>
+                            <option>南京</option>
+                            <option>重庆</option>
+                            <option>西安</option>
+                            <option>长沙</option>
+                            <option>青岛</option>
+                            <option>沈阳</option>
+                            <option>大连</option>
+                            <option>厦门</option>
+                        </select>
+                    </div>
+                    <div map-search="" hide-search-result="hideSearchResult" current-city="currentCity"  map-mode="mapMode" class="map-search ng-isolate-scope">
+                        <form class="mapsearch-inputbar ng-pristine ng-valid"  ng-submit="search.showSuggests($event, search.keyword)">
+                            <input  placeholder="请输入店铺名称" ng-model="search.keyword"   ng-keyup="search.showSuggests($event, search.keyword)"  ng-keydown="search.chooseSuggest($event)" ng-click="search.showSuggests($event)"
+                                ng-focus="search.showSuggests($event, search.keyword)" class="ng-pristine ng-valid">
+                            <button class="btn-stress" type="submit">搜 索</button>
+                        </form>
+                        <div class="mapsearch-suggestlist ui-scrollbar-light">
+                        </div>
+                    </div>
+                </div>
+                <div class="map-content"></div>
+            </div>
+            <div class="mapfooter" map-footer="">
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery.js" ></script>
+<script src="js/index.js" ></script>
+
+</body>
+</html>
