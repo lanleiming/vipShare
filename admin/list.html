@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>VIP共享--个人中心</title>
+<link href="../css/style.css" rel="stylesheet" type="text/css">
+<script src="../js/jquery.js"></script>
+<script src="../js/common.js" type="text/javascript"></script>
+</head>
+<body>
+<div class="layout_header">
+  <div class="header">
+    <div class="h_logo">
+      <a href="javascript:;;" style="color:white;font-size:20px;line-height:20px;">VIP共享网站--个人中心</a>
+    </div>
+    <div class="h_nav"> <span class="hi"><img src="../img/head_default.jpg" alt="id"/> 欢迎你，兰义明！</span>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+<div class="layout_leftnav">
+  <div class="inner">
+    <div class="nav-vertical">
+      <ul class="accordion">
+        <li id="one"> <a href="#one">菜单管理<span></span></a>
+          <ul class="sub-menu">
+            <li><a href="index.html">个人中心</a></li>
+            <li><a href="list.html" class="active">共享的VIP</a></li>
+            <li><a href="textbox.html">新增VIP</a></li>
+          </ul>
+        </li>
+      </ul>
+      <script type="text/javascript">
+		$(document).ready(function() {
+			// Store variables
+			var accordion_head = $('.accordion > li > a'),
+				accordion_body = $('.accordion li > .sub-menu');
+			// Open the first tab on load
+			accordion_head.first().addClass('active').next().slideDown('normal');
+			// Click function
+			accordion_head.on('click', function(event) {
+				// Disable header links
+				event.preventDefault();
+				// Show and hide the tabs on click
+				if ($(this).attr('class') != 'active'){
+					accordion_body.slideUp('normal');
+					$(this).next().stop(true,true).slideToggle('normal');
+					accordion_head.removeClass('active');
+					$(this).addClass('active');
+				}
+			});
+		});
+	</script> 
+    </div>
+  </div>
+</div>
+<div class="layout_rightmain">
+<div class="inner">
+  <div class="page-title"><i class="i_icon"></i> 共享的VIP </div>
+  <div class="pd10 left">
+    <div class="page-operate mt10">
+      <div class="order">
+        <select class="select">
+          <option>按时间先后排序</option>
+        </select>
+      </div>
+      <a href="textbox.html" class="btn btn-primary">新建信息</a>
+      <a href="#" class="btn btn-danger">批量删除</a> </div>
+      <div class="panel">
+<div class="list-table">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <th width="60"><input type="checkbox" id="selAll" class="check" /></th>
+      <th width="">门店</th>
+      <th width="120">图片</th>
+      <th width="80">折扣</th>
+      <th width="90" >持有人</th>
+      <th width="120">卡号</th>
+      <th width="120">电话</th>
+      <th width="120">时间</th>
+      <th width="180" style="padding-left:15px;">操作</th>
+    </tr>
+    <tr>
+      <td><input type="checkbox"  class="check"/></td>
+      <td>耐克(上地店)</td>
+      <td><img src="../img/nike.jpg" width="70" height="70" ></td>
+      <td class="title">9折</td>
+      <td>小明</td>
+      <td>B10000001</td>
+      <td>13011111111</td>
+      <td>2015-07-02 11:41</td>
+      <td class="i-operate"><a href="#" title="查看">查看</a><a href="#" title="编辑">编辑</a><a href="#" title="删除">删除</a></td>
+    </tr>
+    <tr>
+      <td><input type="checkbox"  class="check"/></td>
+      <td>耐克(上地店)</td>
+      <td><img src="../img/nike.jpg" width="70" height="70" ></td>
+      <td class="title">9折</td>
+      <td>小明</td>
+      <td>B10000001</td>
+      <td>13011111111</td>
+      <td>2015-07-02 11:41</td>
+      <td class="i-operate"><a href="#" title="查看">查看</a><a href="#" title="编辑">编辑</a><a href="#" title="删除">删除</a></td>
+    </tr>
+  </table>
+</div>
+</div>
+<div class="list-page">
+  <div class="i-total">共有相关信息 <b>2</b> 条</div>
+  <div class="i-list"> <span><</span><span class="active">1</span><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><a href="#">></a> </div>
+  <div class="clear"></div>
+</div>
+  </div>
+  
+  </div>
+</div>
+
+</body>
+</html>

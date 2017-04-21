@@ -8,10 +8,8 @@
     <script src="js/jquery.js"></script>
     <script src="js/baiduTemplate.js"></script>
 </head>
-
-
-
 <body style="position: relative;">
+<!--列表模板 -->
 <script id="bdt_list" type="text/html">
     <%console.log(data);%>
     <% for(var i=0;i<=data.length-1;i++){ %>
@@ -23,8 +21,7 @@
         </div>
         <div class="rstblock-content">
             <div class="rstblock-title"><%=item.name%></div>
-            <div class="starrating icon-star"><span class="icon-star" style="width:<%=item.level%>%;"></span></div>
-            <span class="rstblock-monthsales"><%=item.user%></span>
+            <span class="rstblock-cost">持有人：<%=item.user%></span>
             <div class="rstblock-cost">卡号：<%=item.card%></div>
             <div class="rstblock-activity">
                 电话：<%=item.phone%>
@@ -43,7 +40,11 @@
                     <div topbar-profilebox="">
                         <div class="topbar-profilebox">
                             <span class="topbar-profilebox-avatar icon-profile" ng-show="!$root.user.username"></span>
-                            <span class="">
+                            <span id="div_user" >
+                                <a href="javascript:;;">兰义明欢迎您!</a>
+                                <a href="admin/index.html" target="_blank" style=" margin-left:20px;text-decoration: underline;">个人中心</a>
+                            </span>
+                            <span id="div_user_login" style="display: none;">
                                 <a href="login.html">登录</a> &nbsp;&nbsp;/&nbsp;&nbsp;
                                 <a href="register.html">注册</a>
                             </span>
