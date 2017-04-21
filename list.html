@@ -1,48 +1,52 @@
 <!doctype html>
-<html ng-app="eleme" perf-error="desktop/">
+<html>
 <head>
     <meta charset="utf-8"/>
     <title>VIP共享网站--会员卡列表</title>
-
-    <link href="//faas.elemecdn.com/desktop/vendor.0c8302.css" rel="stylesheet">
-
-    <link href="//faas.elemecdn.com/desktop/main.7f716a.css" rel="stylesheet">
-
+    <link href="css/list1.css" rel="stylesheet">
+    <link href="css/list2.css" rel="stylesheet">
+    <script src="js/jquery.js"></script>
+    <script src="js/baiduTemplate.js"></script>
 </head>
-<body cute-title=""  style="position: relative;">
 
-<div ng-switch="state.type" state="layoutState" class="ng-isolate-scope">
-    <div ng-switch-default="" topbar-default="" state="state" class="ng-scope ng-isolate-scope">
+
+
+<body style="position: relative;">
+<script id="bdt_list" type="text/html">
+    <%console.log(data);%>
+    <% for(var i=0;i<=data.length-1;i++){ %>
+    <% var item = data[i]; %>
+    <a href="javascript:;;" class="rstblock">
+        <div class="rstblock-logo">
+            <img src="<%=item.img%>" width="70" height="70"  class="rstblock-logo-icon">
+            <span><%=item.zhekou%>折优惠</span>
+        </div>
+        <div class="rstblock-content">
+            <div class="rstblock-title"><%=item.name%></div>
+            <div class="starrating icon-star"><span class="icon-star" style="width:<%=item.level%>%;"></span></div>
+            <span class="rstblock-monthsales"><%=item.user%></span>
+            <div class="rstblock-cost">卡号：<%=item.card%></div>
+            <div class="rstblock-activity">
+                电话：<%=item.phone%>
+            </div>
+        </div>
+    </a>
+    <%}%>
+</script>
+<div class="ng-isolate-scope">
+    <div class="ng-scope ng-isolate-scope">
         <header class="topbar" role="navigation">
             <div class="container clearfix">
-                <h1><a href="/" hardjump="" class="topbar-logo icon-logo"><span>饿了么</span></a></h1>
-                <a href="/"  hardjump=""  class="topbar-item topbar-homepage focus" ng-class="{'focus': $root.locationpath[0] === 'place'}">首页</a>
-
+                <a href="index.html" class="topbar-item topbar-homepage">首页</a>
+                <a href="list.html" class="topbar-item topbar-homepage focus">列表页</a>
                 <nav class="topbar-nav">
-                    <a href="/support/center" hardjump="" class="topbar-nav-link" target="_blank">
-                        <i  class="topbar-nav-icon icon-service"></i>服务中心
-                    </a>
-                    <a href="/support/rules/default" hardjump="" class="topbar-nav-link" target="_blank">规则中心</a>
                     <div topbar-profilebox="">
                         <div class="topbar-profilebox">
-                            <!-- ngIf: $root.user.avatar && $root.topbarType !== 'checkout' --> <span
-                                class="topbar-profilebox-avatar icon-profile" ng-show="!$root.user.username"></span>
-                            <span ng-show="!$root.user.username" class=""><a ng-href="https://account.ele.me/login"
-                                                                             target="_blank"
-                                                                             href="https://account.ele.me/login">登录</a>/<a
-                                    ng-href="https://account.ele.me/register" target="_blank"
-                                    href="https://account.ele.me/register">注册</a></span> <span
-                                class="topbar-profilebox-wrapper ng-hide" ng-show="$root.user.username"><!-- ngIf: $root.topbarType === 'checkout' --> <span
-                                class="topbar-profilebox-username ng-binding"></span> <!-- ngIf: $root.topbarType === 'checkout' --> <!-- ngIf: $root.topbarType !== 'checkout' --><span
-                                class="topbar-profilebox-btn icon-arrow-down ng-scope"
-                                ng-if="$root.topbarType !== 'checkout'"></span><!-- end ngIf: $root.topbarType !== 'checkout' --><div
-                                class="dropbox topbar-profilebox-dropbox"><a class="icon-profile" href="/profile"
-                                                                             hardjump="">个人中心</a> <a class="icon-star"
-                                                                                                     href="/profile/favor"
-                                                                                                     hardjump="">我的收藏</a>
-                            <a class="icon-location" href="/profile/address" hardjump="">我的地址</a> <a
-                                    class="icon-setting" href="/profile/security" hardjump="">安全设置</a> <a
-                                    class="icon-logout" href="JavaScript:" ng-click="logout()">退出登录</a></div></span>
+                            <span class="topbar-profilebox-avatar icon-profile" ng-show="!$root.user.username"></span>
+                            <span class="">
+                                <a href="login.html">登录</a> &nbsp;&nbsp;/&nbsp;&nbsp;
+                                <a href="register.html">注册</a>
+                            </span>
                         </div>
                     </div>
                 </nav>
@@ -50,763 +54,76 @@
         </header>
     </div>
 </div>
-<div class="importantnotification container" role="banner"><!-- ngIf: enable --></div>
-<div class="sidebar" role="complementary" ng-hide="layoutState &amp;&amp; layoutState.hideSidebar">
-    <div class="sidebar-tabs">
-        <div class="toolbar-tabs-middle"><a class="toolbar-btn icon-order toolbar-close" href="/profile/order"
-                                            hardjump="" tooltip="我的订单" tooltip-placement="left"
-                                            ubt-click="toolbar_order">
-            <!-- ngIf: sidebarCount.uncompletedOrder > 0 --></a>
-
-            <div class="toolbar-separator"></div>
-            <a class="toolbar-cartbtn icon-cart toolbar-open" href="JavaScript:" template="cart"
-               ng-class="{'focus': (activeTemplate === 'cart' &amp;&amp; isSidebarOpen), 'toolbar-cartbtn-shownum': foodCount.count}"
-               ubt-click="390">购物车<!-- ngIf: foodCount.count --></a>
-
-            <div class="toolbar-separator"></div>
-            <a class="toolbar-btn icon-notice toolbar-open modal-hide" href="JavaScript:" template="message"
-               ng-class="{'focus': (activeTemplate === 'message' &amp;&amp; isSidebarOpen), 'toolbar-open': user, 'modal-hide': user}"
-               tooltip="我的信息" tooltip-placement="left" ubt-click="392"><!-- ngIf: messageCount.count --></a></div>
-        <div class="toolbar-tabs-bottom">
-            <div class="toolbar-btn icon-QR-code">
-                <div class="dropbox toolbar-tabs-dropbox"><a
-                        href="http://static11.elemecdn.com/eleme/desktop/mobile/index.html" target="_blank"><img
-                        src="//faas.elemecdn.com/desktop/media/img/appqc.95e532.png" alt="下载手机应用">
-
-                    <p>下载手机应用</p>
-
-                    <p class="icon-QR-code-bonus">即可参加分享红包活动</p></a></div>
-            </div>
-            <a class="toolbar-btn icon-service" online-service="" tooltip="在线客服" title="在线客服" tooltip-placement="left"
-               id="live800iconlink" target="_blank" href="JavaScript:" style="visibility: hidden;"></a> <a
-                class="toolbar-btn sidebar-btn-backtop icon-top" tooltip="回到顶部" title="回到顶部" href="JavaScript:"
-                tooltip-placement="left" style="visibility: hidden;"></a></div>
-    </div>
-    <div class="sidebar-content">
-        <!-- ngInclude: activeTemplate ? ('/common/page/_block/sidebar/sidebar-'+ activeTemplate + '/sidebar-'+ activeTemplate + '.html') : '' --></div>
-</div>
 <!-- ngView:  -->
 <div ng-view="" role="main" class="ng-scope">
     <div class="container clearfix ng-scope">
-        <div class="location" ng-style="{visibility: geohash ? '' : 'hidden'}" role="navigation" location="">
-            <span>当前位置:</span> <span class="location-current"><a class="inherit ng-binding" ng-href="/place/wx4ey6d29pd"
-                                                                 ubt-click="401" ng-bind="place.name || place.address"
-                                                                 href="/place/wx4ey6d29pd">海淀区中关村软件园一期</a></span> <span
-                class="location-change"
-                ng-class="{ 'location-hashistory': user.username &amp;&amp; userPlaces &amp;&amp; userPlaces.length > 0 }"><a
-                ng-href="/home" ubt-click="400" hardjump="" href="/home">[切换地址]</a><ul class="dropbox location-dropbox"
-                                                                                       ubt-visit="398">
-            <li class="arrow"></li>
-            <!-- ngRepeat: userPlace in userPlaces | filter:filterPlace | limitTo: 4 -->
-            <li class="changelocation"><a ng-href="/home" hardjump="" href="/home">修改收货地址<span
-                    class="icon-location"></span></a></li>
-        </ul></span> <span ng-transclude=""></span></div>
-        <div class="place-search" role="search" search-input=""><a class="place-search-btn icon-search" ubt-click="403"
-                                                                   ng-attr-ubt-data-keyword="{{searchText}}"
-                                                                   title="搜索商家或美食" ubt-data-keyword=""></a><label
-                for="globalsearch">搜索商家或美食</label><input id="globalsearch"
-                                                         class="place-search-input ng-pristine ng-valid"
-                                                         ng-model="searchText" autocomplete="" placeholder="搜索商家,美食...">
-
+        <div class="place-search" role="search" search-input="">
+            <a class="place-search-btn icon-search"  title="搜索商家或美食" ubt-data-keyword=""></a>
+            <label for="globalsearch">搜索商家或美食</label>
+            <input id="globalsearch"  class="place-search-input ng-pristine ng-valid"   placeholder="请输入店铺名称">
             <div class="searchbox">
-                <div class="searchbox-list searchbox-rstlist ng-hide"
-                     ng-show="searchRestaurants &amp;&amp; searchRestaurants.length > 0"
-                     ng-class="{ 'show-separator': searchFoods &amp;&amp; searchFoods.length > 0 }">
+                <div class="searchbox-list searchbox-rstlist ng-hide" >
                     <ul>
                         <!-- ngRepeat: restaurant in searchRestaurants | orderBy: [ '-is_opening', 'order_lead_time' ] | limitTo: 5 --></ul>
                 </div>
-                <div class="searchbox-list searchbox-foodlist ng-hide"
-                     ng-show="searchFoods &amp;&amp; searchFoods.length > 0">
+                <div class="searchbox-list searchbox-foodlist ng-hide" >
                     <ul><!-- ngRepeat: food in searchFoods  | limitTo: 5 --></ul>
                 </div>
             </div>
         </div>
     </div>
     <!-- ngIf: activities -->
-    <div class="place-tab clearfix container ng-scope">
-        <div class="place-fetchtakeout ng-isolate-scope" show-fetch-takeout-dialog=""><img
-                src="//faas.elemecdn.com/desktop/media/img/takeout.408a87.png" alt="谁去拿外卖"></div>
-    </div>
     <div ng-show="!recentBoughtOnly" class="container ng-scope">
-        <div class="excavator container"><!-- ngIf: rstCategories.length -->
-            <div class="excavator-filter ng-scope" ng-if="rstCategories.length"><span class="excavator-filter-name">商家分类:</span>
-                <!-- ngRepeat: category in rstCategories --><a class="excavator-filter-item ng-binding ng-scope active"
-                                                               href="javascript:" ng-repeat="category in rstCategories"
-                                                               ng-class="{'focus': clickedCategory === category.id &amp;&amp; (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 &amp;&amp; !pumStream}"
-                                                               ng-bind="category.name"
-                                                               ng-click="changeCategory(category)"
-                                                               ubt-click="380">全部商家</a><!-- end ngRepeat: category in rstCategories --><a
-                        class="excavator-filter-item ng-binding ng-scope" href="javascript:"
-                        ng-repeat="category in rstCategories"
-                        ng-class="{'focus': clickedCategory === category.id &amp;&amp; (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 &amp;&amp; !pumStream}"
-                        ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">快餐便当</a><!-- end ngRepeat: category in rstCategories --><a
-                        class="excavator-filter-item ng-binding ng-scope" href="javascript:"
-                        ng-repeat="category in rstCategories"
-                        ng-class="{'focus': clickedCategory === category.id &amp;&amp; (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 &amp;&amp; !pumStream}"
-                        ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">特色菜系</a><!-- end ngRepeat: category in rstCategories --><a
-                        class="excavator-filter-item ng-binding ng-scope" href="javascript:"
-                        ng-repeat="category in rstCategories"
-                        ng-class="{'focus': clickedCategory === category.id &amp;&amp; (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 &amp;&amp; !pumStream}"
-                        ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">异国料理</a><!-- end ngRepeat: category in rstCategories --><a
-                        class="excavator-filter-item ng-binding ng-scope" href="javascript:"
-                        ng-repeat="category in rstCategories"
-                        ng-class="{'focus': clickedCategory === category.id &amp;&amp; (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 &amp;&amp; !pumStream}"
-                        ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">小吃夜宵</a><!-- end ngRepeat: category in rstCategories --><a
-                        class="excavator-filter-item ng-binding ng-scope" href="javascript:"
-                        ng-repeat="category in rstCategories"
-                        ng-class="{'focus': clickedCategory === category.id &amp;&amp; (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 &amp;&amp; !pumStream}"
-                        ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">甜品饮品</a><!-- end ngRepeat: category in rstCategories --><a
-                        class="excavator-filter-item ng-binding ng-scope" href="javascript:"
-                        ng-repeat="category in rstCategories"
-                        ng-class="{'focus': clickedCategory === category.id &amp;&amp; (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 &amp;&amp; !pumStream}"
-                        ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">果蔬生鲜</a><!-- end ngRepeat: category in rstCategories --><a
-                        class="excavator-filter-item ng-binding ng-scope" href="javascript:"
-                        ng-repeat="category in rstCategories"
-                        ng-class="{'focus': clickedCategory === category.id &amp;&amp; (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 &amp;&amp; !pumStream}"
-                        ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">鲜花蛋糕</a><!-- end ngRepeat: category in rstCategories --><a
-                        class="excavator-filter-item ng-binding ng-scope" href="javascript:"
-                        ng-repeat="category in rstCategories"
-                        ng-class="{'focus': clickedCategory === category.id &amp;&amp; (!clickedCategory || clickedCategory < 0) , 'active': activeCategory === category.id, 'premium': category.id === -10001 &amp;&amp; !pumStream}"
-                        ng-bind="category.name" ng-click="changeCategory(category)" ubt-click="380">商店超市</a><!-- end ngRepeat: category in rstCategories -->
-                <div ng-show="subCategories" class="excavator-filter-subbox ng-hide">
-                    <!-- ngRepeat: subitem in subCategories --></div>
+        <div class="excavator container">
+            <div class="excavator-filter ng-scope" ng-if="rstCategories.length">
+                <span class="excavator-filter-name">店铺分类:</span>
+                <a class="excavator-filter-item ng-binding ng-scope active"  href="javascript:" >所有店铺</a>
+                <a class="excavator-filter-item ng-binding ng-scope" href="javascript:">体育</a>
+                <a class="excavator-filter-item ng-binding ng-scope" href="javascript:">美食</a>
+                <a class="excavator-filter-item ng-binding ng-scope" href="javascript:">健身房</a>
+                <a class="excavator-filter-item ng-binding ng-scope" href="javascript:">美容</a>
+                <a class="excavator-filter-item ng-binding ng-scope" href="javascript:">理发</a>
+                <a class="excavator-filter-item ng-binding ng-scope" href="javascript:">酒店</a>
+                <a class="excavator-filter-item ng-binding ng-scope" href="javascript:">网吧</a>
+                <a class="excavator-filter-item ng-binding ng-scope" href="javascript:">KTV</a>
             </div>
             <!-- end ngIf: rstCategories.length --></div>
         <div class="place-rstbox clearfix">
-            <div class="clearfix"
-                 data="filteredRestaurants = (rstStream.restaurants | filter: rstStream.filter | filter: otherFilter | orderBy: [ '-is_opening', rstStream.orderBy || 'index' ])"
-                 style="height: 4200px;"><a href="/shop/1538999" data-rst-id="1538999" data-bidding="" target="_blank"
-                                            class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/f/44/902a5779086f3b668b21fd04b3e5ejpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="鲜芋仙(上地店)" class="rstblock-logo-icon"><span>29 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">鲜芋仙(上地店)</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:94%;"></span></div>
-                    <span class="rstblock-monthsales">月售749单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i></div>
-                </div>
-            </a><a href="/shop/1049349" data-rst-id="1049349" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/8/e3/c861e39927d90c4c8ddc3bb5c4a07png.png?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="锦食堂（上地店）" class="rstblock-logo-icon"><span>36 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">锦食堂（上地店）</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:94%;"></span></div>
-                    <span class="rstblock-monthsales">月售4304单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">票</i></div>
-                </div>
-            </a><a href="/shop/2145000" data-rst-id="2145000" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/0/1d/303af53d7dea26ed204832bd2730epng.png?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="食也佳" class="rstblock-logo-icon"><span>26 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">食也佳</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:90%;"></span></div>
-                    <span class="rstblock-monthsales">月售1365单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">票</i></div>
-                </div>
-            </a><a href="/shop/769523" data-rst-id="769523" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/3/b2/a19c0a5e5a7a7cf597fffdbe65c7ejpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="鲜果时间" class="rstblock-logo-icon"><span>33 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">鲜果时间</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:98%;"></span></div>
-                    <span class="rstblock-monthsales">月售237单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i></div>
-                </div>
-            </a><a href="/shop/2278428" data-rst-id="2278428"
-                   data-bidding="{'index':4,'target':{'restaurantId':2278428,'weight':250,'probability':16.131999969482422},'come_from':1,'next':{'restaurantId':150984828,'weight':160,'probability':24.18199920654297}}"
-                   target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/b/68/173671bf3bbabf2a133903dd4f0e5png.png?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="舌头很忙·小龙虾饭（上地店）" class="rstblock-logo-icon"><span>29 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">舌头很忙·小龙虾饭（上地店）</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:96%;"></span></div>
-                    <span class="rstblock-monthsales">月售549单</span>
-
-                    <div class="rstblock-cost">配送费约¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i></div>
-                </div>
-            </a><a href="/shop/151005378" data-rst-id="151005378" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/8/88/68973deb7bbaa009122b8f9ab13adjpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="茶虞饭后（辉煌店）" class="rstblock-logo-icon"><span>29 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">茶虞饭后（辉煌店）</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:78%;"></span></div>
-                    <span class="rstblock-monthsales">月售182单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#E75959;">新</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i></div>
-                </div>
-            </a><a href="/shop/310213" data-rst-id="310213" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/e/e3/c1a350e7660b8ab612694576cc835png.png?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="柚恋柠檬" class="rstblock-logo-icon"><span>35 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">柚恋柠檬</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:100%;"></span></div>
-                    <span class="rstblock-monthsales">月售77单</span>
-
-                    <div class="rstblock-cost">配送费¥3</div>
-                    <div class="rstblock-activity"><i style="background:#fff;color:#999999;border:1px solid;padding:0;">票</i>
-                    </div>
-                </div>
-            </a><a href="/shop/2086473" data-rst-id="2086473" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/7/ed/dad6e6ba9161b7d585acedf2be5f9png.png?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="星巴克咖啡代购（上地三街店）" class="rstblock-logo-icon"><span>34 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">星巴克咖啡代购（上地三街店）</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:96%;"></span></div>
-                    <span class="rstblock-monthsales">月售103单</span>
-
-                    <div class="rstblock-cost">配送费¥8</div>
-                    <div class="rstblock-activity"></div>
-                </div>
-            </a><a href="/shop/2133169" data-rst-id="2133169" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/7/76/5c7a2848c0fbf54f38e0180edb272png.png?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="Cafe Cake（金隅店）" class="rstblock-logo-icon"><span>45 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">Cafe Cake（金隅店）</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:92%;"></span></div>
-                    <span class="rstblock-monthsales">月售119单</span>
-
-                    <div class="rstblock-cost">免配送费</div>
-                    <div class="rstblock-activity"><i style="background:#fff;color:#999999;border:1px solid;padding:0;">票</i>
-                    </div>
-                </div>
-            </a><a href="/shop/150984828" data-rst-id="150984828"
-                   data-bidding="{'index':9,'target':{'restaurantId':150984828,'weight':160,'probability':24.18199920654297},'come_from':1,'next':{'restaurantId':709959,'weight':100,'probability':34.95500183105469}}"
-                   target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/c/7b/bc3f6fd321fa7f4fe5e1479d722f2png.png?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="赫赫小厨麻辣香锅（上地店）" class="rstblock-logo-icon"><span>34 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">赫赫小厨麻辣香锅（上地店）</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:92%;"></span></div>
-                    <span class="rstblock-monthsales">月售2863单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#E75959;">新</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i></div>
-                </div>
-            </a><a href="/shop/2026857" data-rst-id="2026857" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/a/42/060f3d3544a2fc3c1ea3ccd3d275fjpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="爽快优品简餐咖啡" class="rstblock-logo-icon"><span>35 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">爽快优品简餐咖啡</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:94%;"></span></div>
-                    <span class="rstblock-monthsales">月售145单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-activity"><i style="background:#fff;color:#999999;border:1px solid;padding:0;">票</i>
-                    </div>
-                </div>
-            </a><a href="/shop/1979149" data-rst-id="1979149" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/7/fd/f7aeb75109b7b03eb45fd790b9690png.png?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="云食堂" class="rstblock-logo-icon"><span>32 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">云食堂</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:92%;"></span></div>
-                    <span class="rstblock-monthsales">月售10503单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">票</i></div>
-                </div>
-            </a><a href="/shop/2129742" data-rst-id="2129742" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/8/10/f67db232fd2778c033ace7deebb8cjpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="张姐烤肉拌饭黄焖鸡米饭" class="rstblock-logo-icon"><span>33 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">张姐烤肉拌饭黄焖鸡米饭</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:94%;"></span></div>
-                    <span class="rstblock-monthsales">月售8019单</span>
-
-                    <div class="rstblock-cost">配送费约¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i></div>
-                </div>
-            </a><a href="/shop/1825217" data-rst-id="1825217" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/2/5b/5644ec66ee3ab6c5f42b9846811c3jpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="大鸡排食客空间" class="rstblock-logo-icon"><span>27 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">大鸡排食客空间</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:94%;"></span></div>
-                    <span class="rstblock-monthsales">月售133单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i></div>
-                </div>
-            </a><a href="/shop/709959" data-rst-id="709959"
-                   data-bidding="{'index':14,'target':{'restaurantId':709959,'weight':100,'probability':34.95500183105469},'come_from':1,'next':{'restaurantId':1404453,'weight':240,'probability':13.883000373840332}}"
-                   target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/7/9a/242c46aaca3cc7a2934e0ed018b56png.png?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="顶香阁桂林米粉（粉面煲饭）" class="rstblock-logo-icon"><span>27 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">顶香阁桂林米粉（粉面煲饭）</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:96%;"></span></div>
-                    <span class="rstblock-monthsales">月售4585单</span>
-
-                    <div class="rstblock-cost">配送费¥1</div>
-                    <div class="rstblock-activity"><i style="background:#fff;color:#999999;border:1px solid;padding:0;">票</i>
-                    </div>
-                </div>
-            </a><a href="/shop/571066" data-rst-id="571066" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/a/ce/2585fb808383963db0e6404e03978png.png?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="西少爷肉夹馍（西二旗店）" class="rstblock-logo-icon"><span>38 分钟</span>
-
-                    <div class="elemeicon elemeicon-premiumsign rstblock-logo-premiumsign"></div>
-                </div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">西少爷肉夹馍（西二旗店）</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:94%;"></span></div>
-                    <span class="rstblock-monthsales">月售1170单</span>
-
-                    <div class="rstblock-cost">配送费约¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i></div>
-                </div>
-            </a><a href="/shop/150124520" data-rst-id="150124520" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/a/4a/f8c075ceb70d40dcb6cddf6f6b5e6png.png?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="肉夹小魔王（上地五彩城店）" class="rstblock-logo-icon"><span>28 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">肉夹小魔王（上地五彩城店）</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:96%;"></span></div>
-                    <span class="rstblock-monthsales">月售5216单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-activity"><i style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i>
-                    </div>
-                </div>
-            </a><a href="/shop/2060454" data-rst-id="2060454" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/9/6a/9418d6e855dbb686d77728d0aafa3png.png?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="第1佳大鸡排（上地店）" class="rstblock-logo-icon"><span>24 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">第1佳大鸡排（上地店）</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:92%;"></span></div>
-                    <span class="rstblock-monthsales">月售1197单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i></div>
-                </div>
-            </a><a href="/shop/257496" data-rst-id="257496" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/7/d3/48a777a6b444dc317cc24d101220cjpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="肯德基宅急送(上地店）" class="rstblock-logo-icon"><span>40 分钟</span>
-
-                    <div class="elemeicon elemeicon-premiumsign rstblock-logo-premiumsign"></div>
-                </div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">肯德基宅急送(上地店）</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:96%;"></span></div>
-                    <span class="rstblock-monthsales">月售1060单</span>
-
-                    <div class="rstblock-cost">配送费¥9</div>
-                    <div class="rstblock-activity"><i style="background:#fff;color:#999999;border:1px solid;padding:0;">票</i>
-                    </div>
-                </div>
-            </a><a href="/shop/1404453" data-rst-id="1404453"
-                   data-bidding="{'index':19,'target':{'restaurantId':1404453,'weight':240,'probability':13.883000373840332},'come_from':1,'next':{'restaurantId':1513314,'weight':150,'probability':21.756000518798828}}"
-                   target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/8/b0/95c2ca7546b8813ec87b201bd26adpng.png?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="来一焗（上地店）" class="rstblock-logo-icon"><span>31 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">来一焗（上地店）</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:96%;"></span></div>
-                    <span class="rstblock-monthsales">月售948单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i></div>
-                </div>
-            </a><a href="/shop/150083354" data-rst-id="150083354" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/c/be/20ec65c5838624e7e3bdbf9962cb4jpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="椒麻水煮鱼" class="rstblock-logo-icon"><span>40 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">椒麻水煮鱼</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:94%;"></span></div>
-                    <span class="rstblock-monthsales">月售868单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i></div>
-                </div>
-            </a><a href="/shop/762830" data-rst-id="762830" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/4/81/27b2278ca48b57f34fad7c3a2fcf6jpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="荣记桂林米粉（饭粉面）" class="rstblock-logo-icon"><span>25 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">荣记桂林米粉（饭粉面）</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:94%;"></span></div>
-                    <span class="rstblock-monthsales">月售2773单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">票</i></div>
-                </div>
-            </a><a href="/shop/406860" data-rst-id="406860" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/6/57/3bbab79578803800bdc026cd23502jpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="吉野家(上地三街店)" class="rstblock-logo-icon"><span
-                        class="rstblock-left-timeout">45+ 分钟</span>
-
-                    <div class="elemeicon elemeicon-premiumsign rstblock-logo-premiumsign"></div>
-                </div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">吉野家(上地三街店)</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:96%;"></span></div>
-                    <span class="rstblock-monthsales">月售1528单</span>
-
-                    <div class="rstblock-cost">配送费¥7</div>
-                    <div class="rstblock-activity"></div>
-                </div>
-            </a><a href="/shop/16888" data-rst-id="16888" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/e/26/d660566bbdb20243c8d2602deb35ajpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="富地便当" class="rstblock-logo-icon"><span>33 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">富地便当</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:94%;"></span></div>
-                    <span class="rstblock-monthsales">月售8857单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">票</i></div>
-                </div>
-            </a><a href="/shop/1513314" data-rst-id="1513314"
-                   data-bidding="{'index':24,'target':{'restaurantId':1513314,'weight':150,'probability':21.756000518798828},'come_from':1,'next':{'restaurantId':150077454,'weight':90,'probability':34.73899841308594}}"
-                   target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/9/29/2f120947dfca2faf1606a139d120bjpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="楊銘宇经典黄焖鸡&#8203;" class="rstblock-logo-icon"><span>32 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">楊銘宇经典黄焖鸡&#8203;</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:86%;"></span></div>
-                    <span class="rstblock-monthsales">月售692单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i></div>
-                </div>
-            </a><a href="/shop/762830" data-rst-id="762830" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/4/81/27b2278ca48b57f34fad7c3a2fcf6jpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="荣记桂林米粉（饭粉面）" class="rstblock-logo-icon"><span>25 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">荣记桂林米粉（饭粉面）</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:94%;"></span></div>
-                    <span class="rstblock-monthsales">月售2773单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">票</i></div>
-                </div>
-            </a><a href="/shop/1932581" data-rst-id="1932581" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/3/0a/b6654e82193dcf08bc4ca0157db58jpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="聚瑞祥牛肉饭（嘉华店）" class="rstblock-logo-icon"><span>31 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">聚瑞祥牛肉饭（嘉华店）</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:92%;"></span></div>
-                    <span class="rstblock-monthsales">月售119单</span>
-
-                    <div class="rstblock-cost">配送费约¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">票</i></div>
-                </div>
-            </a><a href="/shop/1803819" data-rst-id="1803819" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/1/fc/e8a4d6ff6b7384b794e52cff6a70fjpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="豫香缘黄焖鸡米饭" class="rstblock-logo-icon"><span>25 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">豫香缘黄焖鸡米饭</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:86%;"></span></div>
-                    <span class="rstblock-monthsales">月售824单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i></div>
-                </div>
-            </a><a href="/shop/150077454" data-rst-id="150077454" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/7/19/fe7e8967388fbc9561f19a51ec47cjpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="吃惑" class="rstblock-logo-icon"><span>25 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">吃惑</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:94%;"></span></div>
-                    <span class="rstblock-monthsales">月售1282单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i></div>
-                </div>
-            </a><a href="/shop/151690912" data-rst-id="151690912" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/d/27/538b5872486ad243c105b089e17aejpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="猪八斤猪手饭" class="rstblock-logo-icon"><span>24 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">猪八斤猪手饭</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:92%;"></span></div>
-                    <span class="rstblock-monthsales">月售534单</span>
-
-                    <div class="rstblock-cost">配送费约¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#E75959;">新</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i></div>
-                </div>
-            </a><a href="/shop/15409" data-rst-id="15409" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/7/91/82c46ddf7f0e52df1688f84cf30d5jpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="优派小厨" class="rstblock-logo-icon"><span>30 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">优派小厨</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:88%;"></span></div>
-                    <span class="rstblock-monthsales">月售5537单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-schedule">可预订，16:30后送餐</div>
-                </div>
-            </a><a href="/shop/1468861" data-rst-id="1468861" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/5/e2/f9276020b4a34ace20dfc6faa2e2cpng.png?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="小火慢炖排骨米饭" class="rstblock-logo-icon"><span>26 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">小火慢炖排骨米饭</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:92%;"></span></div>
-                    <span class="rstblock-monthsales">月售3332单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i></div>
-                </div>
-            </a><a href="/shop/1968760" data-rst-id="1968760" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/1/89/aef18d44b98ad4b433f9b1e6f58fbjpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="芝士咖（上地店）" class="rstblock-logo-icon"><span>32 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">芝士咖（上地店）</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:96%;"></span></div>
-                    <span class="rstblock-monthsales">月售3239单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-activity"><i style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">票</i></div>
-                </div>
-            </a><a href="/shop/434830" data-rst-id="434830" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/e/b5/72abc774d66d113fb4beea1bbd28fjpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="筷子功夫（金域国际店）" class="rstblock-logo-icon"><span>21 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">筷子功夫（金域国际店）</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:94%;"></span></div>
-                    <span class="rstblock-monthsales">月售1184单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">票</i></div>
-                </div>
-            </a><a href="/shop/152340648" data-rst-id="152340648" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/a/16/b3b7f8d1578d209a13c26d34fa462jpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="东方小厨" class="rstblock-logo-icon"><span>19 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">东方小厨</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:0%;"></span></div>
-                    <span class="rstblock-monthsales">月售6单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#E75959;">新</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i></div>
-                </div>
-            </a><a href="/shop/45274" data-rst-id="45274" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/c/28/3413e89ba4b86df8a0aba06b79c67jpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="张亮麻辣烫" class="rstblock-logo-icon"><span>33 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">张亮麻辣烫</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:88%;"></span></div>
-                    <span class="rstblock-monthsales">月售2555单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i></div>
-                </div>
-            </a><a href="/shop/1536661" data-rst-id="1536661" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/c/30/108c8bc5cb9fa3ab0e3f792317ed0jpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="湘正府香辣猪蹄饭" class="rstblock-logo-icon"><span>28 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">湘正府香辣猪蹄饭</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:92%;"></span></div>
-                    <span class="rstblock-monthsales">月售1227单</span>
-
-                    <div class="rstblock-cost">配送费约¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">票</i></div>
-                </div>
-            </a><a href="/shop/961113" data-rst-id="961113" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/1/ef/d3320ac5d37974ed97e2264e0ed40jpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="小两口黄焖鸡米饭" class="rstblock-logo-icon"><span>24 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">小两口黄焖鸡米饭</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:90%;"></span></div>
-                    <span class="rstblock-monthsales">月售1724单</span>
-
-                    <div class="rstblock-cost">配送费约¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i></div>
-                </div>
-            </a><a href="/shop/965400" data-rst-id="965400" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/8/7c/5185996f89144f3a54271259353b1jpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="QQ湘" class="rstblock-logo-icon"><span>26 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">QQ湘</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:94%;"></span></div>
-                    <span class="rstblock-monthsales">月售482单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">票</i></div>
-                </div>
-            </a><a href="/shop/1868003" data-rst-id="1868003" data-bidding="" target="_blank" class="rstblock">
-                <div class="rstblock-logo"><img
-                        src="//fuss10.elemecdn.com/8/75/5aed3aac17b0518437e35c4549790jpeg.jpeg?imageMogr2/thumbnail/70x70/format/webp/quality/85"
-                        width="70" height="70" alt="99金牌米饭" class="rstblock-logo-icon"><span>30 分钟</span></div>
-                <div class="rstblock-content">
-                    <div class="rstblock-title">99金牌米饭</div>
-                    <div class="starrating icon-star"><span class="icon-star" style="width:96%;"></span></div>
-                    <span class="rstblock-monthsales">月售2412单</span>
-
-                    <div class="rstblock-cost">配送费¥5</div>
-                    <div class="rstblock-activity"><i style="background:#57A9FF;">准</i><i
-                            style="background:#fff;color:#999999;border:1px solid;padding:0;">保</i></div>
-                </div>
-            </a></div>
-            <div class="loading ng-binding ng-isolate-scope ng-hide" ng-show="rstStream.status === 'LOADING'" loading=""
-                 content="正在载入更多商家..." type="normal"><!-- ngIf: type==='profile' --> <!-- ngIf: type==='normal' --><img
-                    ng-if="type==='normal'" class="normal ng-scope"
-                    src="//faas.elemecdn.com/desktop/media/img/loading.0e7b2e.gif" alt="正在加载"><!-- end ngIf: type==='normal' -->
-                正在载入更多商家...
-            </div>
-            <div id="fetchMoreRst" ng-show="rstStream.status === 'NEED_USER_ACTION'" class="">点击加载更多商家...</div>
-            <div class="place-rstbox-nodata ng-hide"
-                 ng-show="rstStream.status === 'COMPLETE' &amp;&amp; !filteredRestaurants.length"><img class="nodata"
-                                                                                                       width="100"
-                                                                                                       src="//faas.elemecdn.com/desktop/media/img/icon-restaurant.b3a359.png"
-                                                                                                       alt="找不到商家">
-
-                <div class="typo-small">附近没有找到符合条件的商家，换个筛选条件试试吧</div>
+            <div class="clearfix" id="div_list" style="min-height:1200px;">
             </div>
         </div>
     </div>
 </div>
-<footer class="footer" role="contentinfo">
-    <div class="container clearfix">
-        <div class="footer-link"><h3 class="footer-link-title">用户帮助</h3><a class="footer-link-item"
-                                                                           href="/support/center"
-                                                                           target="_blank">服务中心</a> <a
-                class="footer-link-item" href="/support/question/default" target="_blank">常见问题</a> <a
-                class="footer-link-item" online-service="" href="javascript:" style="visibility: hidden;">在线客服</a></div>
-        <div class="footer-link"><h3 class="footer-link-title">商务合作</h3><a class="footer-link-item"
-                                                                           href="//kaidian.ele.me"
-                                                                           target="_blank">我要开店</a> <a
-                class="footer-link-item" href="/support/about/jiameng" target="_blank">加盟指南</a> <a
-                class="footer-link-item" href="/support/about/contact" target="_blank">市场合作</a> <a
-                class="footer-link-item" href="http://openapi.eleme.io/" target="_blank">开放平台</a></div>
-        <div class="footer-link"><h3 class="footer-link-title">关于我们</h3><a class="footer-link-item"
-                                                                           href="/support/about"
-                                                                           target="_blank">饿了么介绍</a> <a
-                class="footer-link-item" href="http://jobs.ele.me/" target="_blank">加入我们</a> <a class="footer-link-item"
-                                                                                                href="/support/about/contact"
-                                                                                                target="_blank">联系我们</a>
-            <a class="footer-link-item" href="/support/rules/default" target="_blank">规则中心</a></div>
-        <div class="footer-contect">
-            <div class="footer-contect-item">24小时客服热线 : <a class="inherit" href="tel:10105757">10105757</a></div>
-            <div class="footer-contect-item">意见反馈 : <a class="inherit" href="mailto:feedback@ele.me">feedback@ele.me</a>
-            </div>
-            <div class="footer-contect-item">关注我们 :
-                <div href="JavaScript:" class="icon-wechat" ubt-click="402">
-                    <div class="dropbox dropbox-bottom footer-contect-dropbox" ubt-visit="402"><img
-                            src="//faas.elemecdn.com/desktop/media/img/wexinqc100@2x.393ade.png" alt="微信号: elemeorder">
 
-                        <p>微信号: elemeorder</p>
-
-                        <p>饿了么网上订餐</p></div>
-                </div>
-                <a href="http://e.weibo.com/elemeorder" class="icon-weibo" target="_blank"></a></div>
-        </div>
-        <div class="footer-mobile"><a href="https://h.ele.me/landing" target="_blank"><img
-                src="//faas.elemecdn.com/desktop/media/img/appqc.95e532.png" class="footer-mobile-icon"
-                alt="扫一扫下载饿了么手机 App"></a>
-
-            <div class="footer-mobile-content"><h3>下载手机版</h3>
-
-                <p>扫一扫,手机订餐方便</p></div>
-        </div>
-        <div class="footer-copyright serif"><h5 class="owner">所有方：上海拉扎斯信息科技有限公司</h5>
-
-            <p>增值电信业务许可证 : <a href="http://www.shca.gov.cn/" target="_blank">沪B2-20150033</a> | <a
-                    href="http://www.miibeian.gov.cn/" target="_blank">沪ICP备 09007032</a> | <a
-                    href="http://www.sgs.gov.cn/lz/licenseLink.do?method=licenceView&amp;entyId=20120305173227823"
-                    target="_blank">上海工商行政管理</a> Copyright ©2008-2017 ele.me, All Rights Reserved.</p></div>
-        <div class="footer-police container"><a href="http://www.zx110.org/picp/?sn=310100103568" rel="nofollow"
-                                                target="_blank"><img alt="已通过沪公网备案，备案号 310100103568"
-                                                                     src="//faas.elemecdn.com/desktop/media/img/picp_bg.e373b3.jpg"
-                                                                     height="30"></a></div>
-    </div>
-</footer>
+<script>
+    function MyCode(){}
+    MyCode.prototype = {
+        init:function(){
+            $.ajax({
+                type: 'POST',
+                url:'data/list.json',
+                data:{},
+                success:function(result){
+                    var bt = baidu.template;
+                    var html = bt('bdt_list',result);
+                    $('#div_list').html(html);
+                },
+                error:function(ex){
+                    console.log(ex);
+                }
+            });
+        }
+    };
 
 
-<script src="//crayfish.elemecdn.com/www.ele.me/home"></script>
+$(function(){
+
+  new MyCode().init();
+
+});
 
 
-<script src="//v2.live800.com/live800/chatClient/textStatic.js"></script>
-<script src="//v2.live800.com/live800/chatClient/textStatic.js"></script>
+</script>
+
 </body>
 </html>
